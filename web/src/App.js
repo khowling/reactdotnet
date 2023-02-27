@@ -83,7 +83,7 @@ function WeatherAPI() {
     queryFn: () =>
       fetch(`${process.env.REACT_APP_API_URL ||''}/api/WeatherForecast`, {mode: 'cors', credentials: 'include', headers: {
         "Content-Type": "application/json",
-        'Authorization': `Bearer ${authCtx.data[0].access_token}`
+        ...(authCtx.data && {'Authorization': `Bearer ${authCtx.data[0].access_token}`})
       }}).then(
         (res) => res.json(),
       ),
