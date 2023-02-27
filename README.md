@@ -1,43 +1,19 @@
 
-## Example React / .NET 6 C# webapp
+# Secure identity-based Webapp with API
 
-Example Application with react SPA frontend, and .NET 6|7 backend API. 
+Example Application with react SPA frontend, and .NET 6|7 backend API. Demonstrates how to provision your app on Windows App Service, and secure your application with Azure Active Directory.
 
-Demonstrates how to provision your app on Windows App Service, and secure your application with Azure Active Directory.
 
 ![image](https://user-images.githubusercontent.com/1034202/221564349-1199948c-7280-4990-a0cb-62e1eb872362.png)
 
+## Run locally
 
-##  Create Project
-
-### Frontend
-
-To create the web frontend (requires node install)
-
-```
-npx create-react-app web
-```
-
-I've made the following modififications:
- * Modify the `src/App.js` file to include styling from `tailwind` and a call to the dotnet api using the excellent `react-query` data fetching library.  In addition, added a proxy section to `package.json` to allow for local development that routes apis calls.
- * A the `public/web.config` file.  Since the files are served by IIS in Windows App Service, this file tells IIS to ensure index.html is always returned, and the appropriate filemappings are served.
+Start the API, by running `dotnet start` in the `./api` folder
+Start the Web App, by running `npm start` in the `./web` folder
+Navigate to `http://localhost:3000`
 
 
-### API
-
-To create the `dotnet` api (requires dotnet install)
-
-```
-mkdir api; cd api
-dotnet new webapi
-```
-
-When run `dotnet run`, dotnet project exposes a api on `http://localhost:5202/api/WeatherForecast`
-
-I have only added the Authentication library for this app.
-
-Docs : learn.microsoft.com/en-us/aspnet/core/web-api/?view=aspnetcore-7.0
-
+# Deploy to Azure
 
 ## Create resources in Azure
 
@@ -151,3 +127,35 @@ See `App.js`
         (res) => res.json(),
       ),
 ```
+
+# Appendix
+
+## How the Project was Created
+
+### Frontend
+
+To create the web frontend (requires node install)
+
+```
+npx create-react-app web
+```
+
+I've made the following modififications:
+ * Modify the `src/App.js` file to include styling from `tailwind` and a call to the dotnet api using the excellent `react-query` data fetching library.  In addition, added a proxy section to `package.json` to allow for local development that routes apis calls.
+ * A the `public/web.config` file.  Since the files are served by IIS in Windows App Service, this file tells IIS to ensure index.html is always returned, and the appropriate filemappings are served.
+
+
+### API
+
+To create the `dotnet` api (requires dotnet install)
+
+```
+mkdir api; cd api
+dotnet new webapi
+```
+
+When run `dotnet run`, dotnet project exposes a api on `http://localhost:5202/api/WeatherForecast`
+
+I have only added the Authentication library for this app.
+
+Docs : learn.microsoft.com/en-us/aspnet/core/web-api/?view=aspnetcore-7.0
