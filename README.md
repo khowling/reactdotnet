@@ -44,6 +44,8 @@ Create 2 'WebApp' choosing `.NET 6 runtime`, this will provide a managed `IIS` f
 
 ## Build and Deploy the app
 
+The following explains how to manually deploy the react and dotnet apps to App Service using the command line `az cli` tool.  This can be incorporated into your preffered CI/CD pipelines.
+
 ### Deploy the API
 
 First build a release
@@ -63,9 +65,6 @@ az webapp deploy -g <resource-group> -n <webapp name> --src-path ./release.zip
 
 ### Deploy the React Website
 
-> ! Note
-> The following can be run manually, or added to a CI/CD pipeline
-
 
 First, we need to get the hostname of the backend API before we build a release, as React variables are resolved at buildtime.  The following command will set the `REACT_APP_API_URL` variable to the backend API hostname
 
@@ -73,11 +72,11 @@ First, we need to get the hostname of the backend API before we build a release,
 export REACT_APP_API_URL="https://$(az webapp show -g <resource-group> -n <api webapp name> --query defaultHostName -o tsv)"
 ```
 
-Add CORS rules to the backend to allow the frontend origin to call it.
-
-```
-az webapp cors add  -g uni-appservice-auth -n dotnet6win  --allowed-origins "https://$(az webapp show -g uni-appservice-auth -n react18win --query defaultHostName -o tsv)"
-```
+ > ! NOTE
+ > Add CORS rules to the backend to allow the frontend origin to call it.
+ > ```
+ > az webapp cors add  -g uni-appservice-auth -n dotnet6win  --allowed-origins "https://$(az webapp show -g uni-appservice-auth -n react18win --query defaultHostName -o tsv)"
+ > ```
 
 Now we can build
 
@@ -92,6 +91,11 @@ Now publish to the webapp, create Zip file of the release assets, and deploy
 (cd build && zip -r ../release.zip  *)
 az webapp deploy -g <resource-group> -n <webapp name> --src-path ./release.zip
 ```
+
+## Add Authentiction
+
+We will use the built in `Authentication` feature of App Service, we can enable this, and we will get a AAD app registration that represents this application, but selecting **Add identity provider** with Microsoft - Azure Active Directory
+
 
 
 
