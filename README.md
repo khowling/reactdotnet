@@ -100,10 +100,19 @@ az webapp deploy -g <resource-group> -n <webapp name> --src-path ./release.zip
 
 ## Add Authentiction
 
-We will use the built in `Authentication` feature of App Service, we can enable this, and we will get a AAD app registration that represents this application, but selecting **Add identity provider** with Microsoft - Azure Active Directory
+We will use the built in `Authentication` feature of App Service,  this will ensure both our webapp and api app will require authenticated users to access the site. To enable this, configure  **Authentication -> Add identity provider** with Microsoft - Azure Active Directory, for **BOTH** apps. We will get 2 AAD app registration that represents the web and api applications, 
+
+This will expose a route `/.auth/me` that will provide, inforamtion about the logged on user to the both apps.
 
 
 ![image](https://user-images.githubusercontent.com/1034202/221538329-1dda8791-7ab6-4cbb-bffc-42d19566b866.png)
 
 
+###  Enable the webapp to call the API app
+
+We can configure the App Service **Authentication** feature to return a `access_token` to the web app to allow us to call the API.
+
+This process is documented here: https://learn.microsoft.com/en-us/azure/app-service/tutorial-auth-aad?pivots=platform-windows#grant-front-end-app-access-to-back-end
+
+1. **Grant front-end app access to back end**
 

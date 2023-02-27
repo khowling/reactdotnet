@@ -12,8 +12,46 @@ function App() {
   return (
     // Provide the client to your App
     <QueryClientProvider client={queryClient}>
+      <Header />
       <WeatherAPI />
     </QueryClientProvider>
+  )
+}
+
+function Header() {
+
+  const { isInitialLoading, isError, data, error, refetch, isFetching } = useQuery({
+    queryKey: ['aadData'],
+    queryFn: () =>
+      fetch(`/.auth/me`).then(
+        (res) => res.json(),
+      ),
+  })
+
+  return (
+    <header class="bg-white">
+      <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
+      <div class="flex lg:flex-1">
+      <a href="#" class="-m-1.5 p-1.5">
+        <span class="sr-only">Example App</span>
+        <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt=""/>
+      </a>
+    </div>
+        <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+        <a href="#" class="text-sm font-semibold leading-6 text-gray-900">
+        {!data ?
+          isError ? (
+            <span>Error: Unable to access authentication information</span>
+          ) : isInitialLoading && (
+            <span>Loading...</span>
+          ) : (
+            <span>{data[0].user_claims.find(x => x.typ === 'name').val}</span>
+          )}
+          
+          </a>
+      </div>
+      </nav>
+    </header>
   )
 }
 
