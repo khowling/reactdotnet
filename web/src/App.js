@@ -1,3 +1,4 @@
+import { Children, createContext, useContext } from 'react';
 
 import {
   QueryClient,
@@ -8,19 +9,22 @@ import {
 // Create a client
 const queryClient = new QueryClient()
 
+const AuthContext = createContext({});
+
 function App() {
   return (
     // Provide the client to your App
     <QueryClientProvider client={queryClient}>
-      <Header />
-      <WeatherAPI />
+        <GetAuthData>
+          <Header />
+          <WeatherAPI />
+        </GetAuthData>
     </QueryClientProvider>
   )
 }
 
-function Header() {
-
-  const { isInitialLoading, isError, data, error, refetch, isFetching } = useQuery({
+function GetAuthData({children}) {
+  const authData = useQuery({
     queryKey: ['aadData'],
     queryFn: () =>
       fetch(`/.auth/me`).then(
@@ -28,6 +32,17 @@ function Header() {
       ),
   })
 
+  return (
+    <AuthContext.Provider value={authData}>
+      {children}
+    </AuthContext.Provider>
+  )
+}
+
+
+function Header() {
+  const { isInitialLoading, isError, data, error, refetch, isFetching } = useContext(AuthContext);
+  
   return (
     <header class="bg-white">
       <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
@@ -57,11 +72,19 @@ function Header() {
 
 function WeatherAPI() {
 
+  const authCtx = useContext(AuthContext);
+  
+  console.log ('WeatherAPI')
+  console.log (authCtx)
+
   const { isInitialLoading, isError, data, error, refetch, isFetching } = useQuery({
     queryKey: ['weatherData'],
     enabled: false,
     queryFn: () =>
-      fetch(`${process.env.REACT_APP_API_URL ||''}/api/WeatherForecast`, {mode: 'cors', credentials: 'omit'}).then(
+      fetch(`${process.env.REACT_APP_API_URL ||''}/api/WeatherForecast`, {mode: 'cors', credentials: 'include', headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${authCtx.data[0].access_token}`
+      }}).then(
         (res) => res.json(),
       ),
   })

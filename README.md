@@ -83,6 +83,11 @@ export REACT_APP_API_URL="https://$(az webapp show -g <resource-group> -n <api w
  > ```
  > az webapp cors add  -g uni-appservice-auth -n dotnet6win  --allowed-origins "https://$(az webapp show -g uni-appservice-auth -n react18win --query defaultHostName -o tsv)"
  > ```
+ >
+ > And ENSURE `Enable Access-Control-Allow-Credentials`
+ > ```
+ > az resource update --name web --resource-group uni-appservice-auth   --namespace Microsoft.Web --resource-type config --parent sites/dotnet6win --set properties.cors.supportCredentials=true
+ >
 
 Now we can build
 
@@ -129,3 +134,18 @@ Navigate to : https://resources.azure.com/
 
 ![image](https://user-images.githubusercontent.com/1034202/221547826-c3961e0c-5e6b-4b03-98c6-2fbb36710241.png)
 
+
+> ! NOTE
+> Ensure you logout of any existing session after you make this modification, for example `https://react18win.azurewebsites.net/.auth/logout`
+
+3. **Add the access token to the API fetch call**
+
+See `App.js`
+```
+ fetch(`${process.env.REACT_APP_API_URL ||''}/api/WeatherForecast`, {mode: 'cors', credentials: 'include', headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${authCtx.data[0].access_token}`
+      }}).then(
+        (res) => res.json(),
+      ),
+```
