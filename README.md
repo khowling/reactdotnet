@@ -103,6 +103,7 @@ az webapp deploy -g <resource-group> -n <webapp name> --src-path ./release.zip
 We will use the built in `Authentication` feature of App Service, we can enable this, and we will get a AAD app registration that represents this application, but selecting **Add identity provider** with Microsoft - Azure Active Directory
 
 
+![image](https://user-images.githubusercontent.com/1034202/221538329-1dda8791-7ab6-4cbb-bffc-42d19566b866.png)
 
 
 
