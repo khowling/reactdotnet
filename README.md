@@ -41,6 +41,12 @@ Docs : learn.microsoft.com/en-us/aspnet/core/web-api/?view=aspnetcore-7.0
 
 Create 2 'WebApp' choosing `.NET 6 runtime`, this will provide a managed `IIS` for both the frontend to server the static assets, and the API. You can use the portal `portal.zure.com`, or the `az cli`, or `Visual Studio / Visual Studio Code` tooling. 
 
+### API App
+![image](https://user-images.githubusercontent.com/1034202/221536452-a22d01eb-c661-4dfe-8cd8-238d2bba0b5c.png)
+
+### React App (hosted in IIS)
+![image](https://user-images.githubusercontent.com/1034202/221536667-4f8462bc-e855-43ba-829f-49264e1f4a0e.png)
+
 
 ## Build and Deploy the app
 
