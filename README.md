@@ -5,6 +5,8 @@ Example Application with react SPA frontend, and .NET 6|7 backend API.
 
 Demonstrates how to provision your app on Windows App Service, and secure your application with Azure Active Directory.
 
+![image](https://user-images.githubusercontent.com/1034202/221564349-1199948c-7280-4990-a0cb-62e1eb872362.png)
+
 
 ##  Create Project
 
