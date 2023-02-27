@@ -1,25 +1,29 @@
 
 ## Example React / .NET 6 C# webapp
 
+Example Application with react SPA frontend, and .NET 6|7 backend API. 
+
+Demonstrates how to provision your app on Windows App Service, and secure your application with Azure Active Directory.
+
 
 ##  Create Project
 
 ### Frontend
 
-To create the web frontend
+To create the web frontend (requires node install)
 
 ```
 npx create-react-app web
 ```
 
 I've made the following modififications:
- * Modify the `src/App.js` file to include styling from `tailwind` and a call to the dotnet api using the excellent `react-query` data fetching library.  In addition, added a proxy section to `package.json` to allow for local development.
- * A the `public/web.config` file, since the files are served by IIS, this file tells IIS to ensure index.html is always returned, and the appropriate filemappings are served.
+ * Modify the `src/App.js` file to include styling from `tailwind` and a call to the dotnet api using the excellent `react-query` data fetching library.  In addition, added a proxy section to `package.json` to allow for local development that routes apis calls.
+ * A the `public/web.config` file.  Since the files are served by IIS in Windows App Service, this file tells IIS to ensure index.html is always returned, and the appropriate filemappings are served.
 
 
 ### API
 
-To create the `dotnet` api
+To create the `dotnet` api (requires dotnet install)
 
 ```
 mkdir api; cd api
@@ -35,7 +39,7 @@ Docs : learn.microsoft.com/en-us/aspnet/core/web-api/?view=aspnetcore-7.0
 
 ## Create resources in Azure
 
-Create 2 'WebApp' choosing `.NET 6 runtime`, this will provide a managed `IIS` for both the frontend to server the static assets, and the API
+Create 2 'WebApp' choosing `.NET 6 runtime`, this will provide a managed `IIS` for both the frontend to server the static assets, and the API. You can use the portal `portal.zure.com`, or the `az cli`, or `Visual Studio / Visual Studio Code` tooling. 
 
 
 ## Build and Deploy the app
