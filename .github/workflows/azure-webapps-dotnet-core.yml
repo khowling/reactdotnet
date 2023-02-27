@@ -67,7 +67,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: api-build
-          path: ./release
+          path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/release
 
   deploy:
     permissions:
