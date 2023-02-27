@@ -116,3 +116,5 @@ This process is documented here: https://learn.microsoft.com/en-us/azure/app-ser
 
 1. **Grant front-end app access to back end**
 
+![image](https://user-images.githubusercontent.com/1034202/221545563-655f7924-37c3-4f67-b13b-db6e37df5dd8.png)
+
