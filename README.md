@@ -118,3 +118,12 @@ This process is documented here: https://learn.microsoft.com/en-us/azure/app-ser
 
 ![image](https://user-images.githubusercontent.com/1034202/221545563-655f7924-37c3-4f67-b13b-db6e37df5dd8.png)
 
+
+Permission scope `api://049bcddf-008c-4499-a315-c52cb7e46bce/user_impersonation`
+
+2. **Configure App Service to return a usable access token**
+
+This enables the react app Authentication service to return a access_token that can be used with the backend API (its a bit fiddly to setup at the time of writing)
+
+Navigate to : https://resources.azure.com/
+
