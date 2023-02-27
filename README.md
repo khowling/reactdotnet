@@ -127,3 +127,5 @@ This enables the react app Authentication service to return a access_token that 
 
 Navigate to : https://resources.azure.com/
 
+![image](https://user-images.githubusercontent.com/1034202/221547826-c3961e0c-5e6b-4b03-98c6-2fbb36710241.png)
+
