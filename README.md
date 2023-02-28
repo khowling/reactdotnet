@@ -8,9 +8,11 @@ Example Application with react SPA frontend, and .NET 6|7 backend API. Demonstra
 
 ## Run locally
 
-Start the API, by running `dotnet run` in the `./api` folder
-Start the Web App, by running `npm start` in the `./web` folder
-Navigate to `http://localhost:3000`
+1. Start the API App, by running `dotnet run` in the `./api` folder.
+
+2. Start the Web App, by running `npm i` then `npm start` in the `./web` folder
+
+3. Navigate to `http://localhost:3000`
 
 
 # Deploy to Azure
