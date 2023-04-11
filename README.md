@@ -44,7 +44,7 @@ dotnet publish -c Release -o ./release
 Now publish to the webapp, create Zip file of the release assets, and deploy
 ```
 # Create Zip of assets
-(cd release && zip -r release.zip *)
+(cd release && zip -r ../release.zip *)
 az webapp deploy -g <resource-group> -n <webapp name> --src-path ./release.zip
 ```
 
