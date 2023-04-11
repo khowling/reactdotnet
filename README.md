@@ -8,6 +8,9 @@ Example Application with react SPA frontend, and .NET 6|7 backend API. Demonstra
 
 ## Run locally
 
+> **Note**
+> Requires [dotnet](https://dotnet.microsoft.com/download) and [nodejs](https://nodejs.org/) 
+
 1. Start the API App, by running `dotnet run` in the `./api` folder.
 
 2. Start the Web App, by running `npm i` then `npm start` in the `./web` folder
